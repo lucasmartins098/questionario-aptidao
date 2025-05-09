@@ -5,6 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionário de Dons</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos base */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Media queries para responsividade */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .trocar-questionario {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .instrucoes ul {
+                padding-left: 20px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .radio-option {
+                margin: 5px 0;
+                width: 100%;
+            }
+
+            .botoes {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .botoes button {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            .questao {
+                padding: 10px;
+            }
+
+            .radio-option label {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
