@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário de Dons Redentivos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .intro {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .question-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+        }
+        
+        .option input {
+            margin-right: 5px;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .results {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .gift {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .gift-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            border-radius: 5px;
+            background-color: #3498db;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            font-size: 12px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .section-indicator {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Questionário de Dons Redentivos</h1>
+    
+    <div class="intro">
+        <h2>Instruções</h2>
+        <p>Para cada uma das sentenças, pense em como você costuma atuar em sua organização.</p>
+        <p>Use o seguinte sistema de pontuação:</p>
+        <ul>
+            <li><strong>1 - NUNCA</strong> verdadeiro para você</li>
+            <li><strong>2 - ÀS VEZES</strong> verdadeiro para você</li>
+            <li><strong>3 - NA MAIORIA DAS VEZES</strong> verdadeiro para você</li>
+            <li><strong>4 - SEMPRE</strong> verdadeiro para você</li>
+        </ul>
+    </div>
+    
+    <div class="section-indicator">Seção 1 de 3</div>
+    
+    <div class="navigation">
+        <button id="prev-btn" disabled>Anterior</button>
+        <button id="next-btn">Próxima Seção</button>
+    </div>
+    
+    <div class="question-container" id="questions-container">
+        <!-- As perguntas serão inseridas aqui pelo JavaScript -->
+    </div>
+    
+    <button id="calculate-btn" style="display: none;">Calcular Resultados</button>
+    
+    <div class="results" id="results-container">
+        <h2>Seus Dons Redentivos</h2>
+        <div id="gifts-results">
+            <!-- Os resultados serão inseridos aqui -->
+        </div>
+    </div>
+    
+    <script>
+        // Dados do questionário (apenas uma parte como exemplo)
+        const questions = [
+            // Seção 1
+            [
+                "Apresenta a verdade de maneira lógica e sistemática",
+                "Guarda recursos financeiros para gerações futuras (ex.: filhos, netos, etc.)",
+                "É altamente motivado para organizar e implementar planos",
+                "É capaz de ter desentendimentos significativos sem ofender",
+                "Tem uma tremenda capacidade de mostrar amor",
+                "Identifica o certo rapidamente e com precisão",
+                "Reconhece necessidades práticas e é rápido para atendê-las",
+                "Valida a verdade confrontando-a com os fatos",
+                "É capaz de aceitar pessoas com diversos pontos de vista",
+                "Prefere estar sob autoridade para ter autoridade"
+            ],
+            // Seção 2
+            [
+                "Evita ficar sozinho",
+                "Sente a atmosfera emocional de um grupo/indivíduo",
+                "Vê tudo como preto ou branco",
+                "Gosta de mostrar hospitalidade",
+                "Gosta de estudar e pesquisar",
+                "Gosta de manter todas as opções abertas o maior tempo possível",
+                "Suporta críticas para realizar a tarefa",
+                "Relaciona-se com pessoas independentemente da cultura, raça, religião, origem, etc.",
+                "Evita conflitos e confrontos",
+                "Percebe facilmente o caráter de indivíduos ou grupos"
+            ],
+            // Seção 3
+            [
+                "Permanece em algo até que esteja completo",
+                "Enfatiza fatos e precisão das palavras",
+                "Lida com todas as situações como uma situação única",
+                "É hábil no gerenciamento do tempo",
+                "Ama encorajar os outros a viverem vitoriosamente",
+                "É atraído por pessoas que estão sofrendo ou angustiadas",
+                "Trabalha a partir de princípios",
+                "Acha difícil dizer 'não' aos pedidos de ajuda",
+                "Resolve problemas começando com uma fundamentação teórica",
+                "Tende a ser mais relativo do que absoluto"
+            ]
+        ];
+        
+        // Mapeamento de dom redentivos (simplificado)
+        const giftsMapping = {
+            "ME": { name: "Mestre", questions: [0, 7, 14, 21, 28] },
+            "D": { name: "Doador", questions: [1, 8, 15, 22, 29] },
+            "L": { name: "Líder", questions: [2, 9, 16, 23] },
+            "E": { name: "Encorajador", questions: [4, 11, 18, 25] },
+            "MI": { name: "Misericordioso", questions: [5, 12, 19, 26] },
+            "P": { name: "Profeta", questions: [6, 13, 20, 27] },
+            "S": { name: "Servo", questions: [3, 10, 17, 24] }
+        };
+        
+        // Variáveis de estado
+        let currentSection = 0;
+        let answers = Array(questions.flat().length).fill(0);
+        
+        // Elementos do DOM
+        const questionsContainer = document.getElementById('questions-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const calculateBtn = document.getElementById('calculate-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const giftsResults = document.getElementById('gifts-results');
+        const sectionIndicator = document.querySelector('.section-indicator');
+        
+        // Função para renderizar as perguntas da seção atual
+        function renderQuestions() {
+            questionsContainer.innerHTML = '';
+            sectionIndicator.textContent = `Seção ${currentSection + 1} de ${questions.length}`;
+            
+            questions[currentSection].forEach((question, index) => {
+                const globalIndex = getGlobalIndex(currentSection, index);
+                
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = `${globalIndex + 1}. ${question}`;
+                questionDiv.appendChild(questionText);
+                
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                
+                for (let i = 1; i <= 4; i++) {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `q${globalIndex}`;
+                    input.value = i;
+                    input.id = `q${globalIndex}-${i}`;
+                    input.checked = answers[globalIndex] === i;
+                    input.addEventListener('change', () => {
+                        answers[globalIndex] = parseInt(input.value);
+                    });
+                    
+                    const label = document.createElement('label');
+                    label.htmlFor = `q${globalIndex}-${i}`;
+                    
+                    switch(i) {
+                        case 1: label.textContent = 'NUNCA'; break;
+                        case 2: label.textContent = 'ÀS VEZES'; break;
+                        case 3: label.textContent = 'NA MAIORIA DAS VEZES'; break;
+                        case 4: label.textContent = 'SEMPRE'; break;
+                    }
+                    
+                    optionDiv.appendChild(input);
+                    optionDiv.appendChild(label);
+                    optionsDiv.appendChild(optionDiv);
+                }
+                
+                questionDiv.appendChild(optionsDiv);
+                questionsContainer.appendChild(questionDiv);
+            });
+            
+            // Atualizar estado dos botões
+            prevBtn.disabled = currentSection === 0;
+            nextBtn.disabled = false;
+            nextBtn.textContent = currentSection === questions.length - 1 ? 'Finalizar' : 'Próxima Seção';
+            calculateBtn.style.display = currentSection === questions.length - 1 ? 'block' : 'none';
+        }
+        
+        // Função auxiliar para obter o índice global da pergunta
+        function getGlobalIndex(section, index) {
+            let globalIndex = 0;
+            for (let i = 0; i < section; i++) {
+                globalIndex += questions[i].length;
+            }
+            return globalIndex + index;
+        }
+        
+        // Função para calcular e mostrar os resultados
+        function calculateResults() {
+            const giftScores = {};
+            
+            // Calcular pontuação para cada dom
+            for (const [key, gift] of Object.entries(giftsMapping)) {
+                giftScores[key] = gift.questions.reduce((sum, qIndex) => sum + (answers[qIndex] || 0), 0);
+            }
+            
+            // Ordenar dons por pontuação
+            const sortedGifts = Object.entries(giftScores).sort((a, b) => b[1] - a[1]);
+            
+            // Mostrar resultados
+            giftsResults.innerHTML = '';
+            
+            sortedGifts.forEach(([key, score]) => {
+                const maxScore = giftsMapping[key].questions.length * 4;
+                const percentage = Math.round((score / maxScore) * 100);
+                
+                const giftDiv = document.createElement('div');
+                giftDiv.className = 'gift';
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'gift-name';
+                nameDiv.textContent = `${giftsMapping[key].name} (${score}/${maxScore})`;
+                giftDiv.appendChild(nameDiv);
+                
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'progress-container';
+                
+                const progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${percentage}%`;
+                
+                progressContainer.appendChild(progressBar);
+                giftDiv.appendChild(progressContainer);
+                giftsResults.appendChild(giftDiv);
+            });
+            
+            resultsContainer.style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+        
+        // Event listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentSection > 0) {
+                currentSection--;
+                renderQuestions();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentSection < questions.length - 1) {
+                currentSection++;
+                renderQuestions();
+            } else {
+                calculateResults();
+            }
+        });
+        
+        calculateBtn.addEventListener('click', calculateResults);
+        
+        // Inicializar
+        renderQuestions();
+    </script>
+</body>
+</html>

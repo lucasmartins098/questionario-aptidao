@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário de Dons</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 id="tituloQuestionario">Questionário de Dons Ministeriais</h1>
+            <button onclick="trocarQuestionario()" class="trocar-questionario">
+                Alternar Questionário
+            </button>
+        </header>
+
+        <main>
+            <form id="questionarioForm">
+                <div class="instrucoes">
+                    <h2>Instruções</h2>
+                    <div id="instrucoes-ministerial">
+                        <p>Para cada afirmação, selecione um número de 0 a 5:</p>
+                        <ul>
+                            <li>0 = Nunca</li>
+                            <li>1 = Raramente</li>
+                            <li>2 = Ocasionalmente</li>
+                            <li>3 = Frequentemente</li>
+                            <li>4 = Muito Frequentemente</li>
+                            <li>5 = Sempre</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="instrucoes-redentivo" style="display: none;">
+                        <p>Para cada afirmação, selecione uma das opções:</p>
+                        <ul>
+                            <li>1 = Nunca</li>
+                            <li>2 = Às Vezes</li>
+                            <li>3 = Na Maioria das Vezes</li>
+                            <li>4 = Sempre</li>
+                        </ul>
+                    </div>
+
+                    <div id="instrucoes-motivacional" style="display: none;">
+                        <p>Para cada afirmação, selecione uma das opções:</p>
+                        <ul>
+                            <li>0 = Nunca</li>
+                            <li>1 = Raramente</li>
+                            <li>2 = Às Vezes</li>
+                            <li>3 = Usualmente</li>
+                            <li>4 = Na Maioria das Vezes</li>
+                            <li>5 = Sempre</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="questoes">
+                    <!-- As questões serão inseridas via JavaScript -->
+                </div>
+
+                <div class="botoes">
+                    <button type="submit" id="calcular">Calcular Resultados</button>
+                    <button type="reset" id="limpar">Limpar Respostas</button>
+                </div>
+            </form>
+
+            <div id="resultados" class="hidden">
+                <h2>Seus Resultados</h2>
+                <div id="graficoDons"></div>
+                <div id="interpretacao"></div>
+            </div>
+        </main>
+    </div>
+    <script src="dados.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
